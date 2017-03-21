@@ -1,4 +1,5 @@
 import numpy as np
+import re
 
 class LIWC:
     def __init__(self):
@@ -61,7 +62,7 @@ class LIWC:
     def build_features(self, texts):
         liwc_ret = np.zeros((len(texts), len(self.dim_map)))
         for idx, review in enumerate(texts):
-            for word in review:
+            for word in re.findall(r'\w+', review):
                 if word in self.dic:
                     for d in self.dic[word]:
                         liwc_ret[idx][d] += 1
