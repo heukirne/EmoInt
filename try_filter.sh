@@ -1,0 +1,1 @@
+ java -Xmx20G -cp ../weka-3-8-1/weka.jar weka.Run weka.filters.unsupervised.attribute.TweetToLexiconFeatureVector -I 2 -A -b -i data/anger-ratings-0to1.train.arff

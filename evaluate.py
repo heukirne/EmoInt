@@ -39,19 +39,19 @@ def evaluate(pred,gold):
         data_dic={}
         
         for line in gold_lines:
-            parts=line.split('\t')
+            parts=line.decode().split('\t')
             if len(parts)==4:   
-                data_dic[int(parts[0])]=[float(line.split('\t')[3])]
+                data_dic[int(parts[0])]=[float(line.decode().split('\t')[3])]
             else:
                 raise ValueError('Format problem.')
         
         
         for line in pred_lines:
-            parts=line.split('\t')
+            parts=line.decode().split('\t')
             if len(parts)==4:  
                 if int(parts[0]) in data_dic:
                     try:
-                        data_dic[int(parts[0])].append(float(line.split('\t')[3]))
+                        data_dic[int(parts[0])].append(float(line.decode().split('\t')[3]))
                     except ValueError:
                         # Invalid predictions are replaced by a default value
                         data_dic[int(parts[0])].append(0.5)
@@ -126,19 +126,19 @@ def main(argv):
         pred=argv[i+1]
         gold=argv[i+2]       
         result=evaluate(pred,gold)
-        print "Pearson correlation between "+pred+" and "+gold+":\t"+str(result[0])        
+        print ("Pearson correlation between "+pred+" and "+gold+":\t"+str(result[0]))
         pear_results.append(result[0])
         
         
-        print "Spearman correlation between "+pred+" and "+gold+":\t"+str(result[1])        
+        print ("Spearman correlation between "+pred+" and "+gold+":\t"+str(result[1]))       
         spear_results.append(result[1])
         
         
-        print "Pearson correlation for gold scores in range 0.5-1 between "+pred+" and "+gold+":\t"+str(result[2])        
+        print ("Pearson correlation for gold scores in range 0.5-1 between "+pred+" and "+gold+":\t"+str(result[2]))
         pear_results_range_05_1.append(result[2])
         
         
-        print "Spearman correlation for gold scores in range 0.5-1 between "+pred+" and "+gold+":\t"+str(result[3])        
+        print ("Spearman correlation for gold scores in range 0.5-1 between "+pred+" and "+gold+":\t"+str(result[3]))
         spear_results_range_05_1.append(result[3])
         
         
@@ -150,13 +150,13 @@ def main(argv):
     avg_pear_range_05_1=numpy.mean(pear_results_range_05_1)
     avg_spear_range_05_1=numpy.mean(spear_results_range_05_1)
     
-    print
+    print()
     
-    print "Average Pearson correlation:\t"+str(avg_pear)
-    print "Average Spearman correlation:\t"+str(avg_spear)
+    print ("Average Pearson correlation:\t"+str(avg_pear))
+    print ("Average Spearman correlation:\t"+str(avg_spear))
         
-    print "Average Pearson correlation for gold scores in range 0.5-1:\t"+str(avg_pear_range_05_1)
-    print "Average Spearman correlationfor gold scores in range 0.5-1:\t"+str(avg_spear_range_05_1)
+    print ("Average Pearson correlation for gold scores in range 0.5-1:\t"+str(avg_pear_range_05_1))
+    print ("Average Spearman correlationfor gold scores in range 0.5-1:\t"+str(avg_spear_range_05_1))
     
 if __name__ == "__main__":
     main(sys.argv[1:])
