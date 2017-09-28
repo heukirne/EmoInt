@@ -1,0 +1,7 @@
+@inproceedings{santos2017pln,
+  title={PLN-PUCRS at EmoInt-2017: Psycholinguistic features for emotion intensity prediction in tweets},
+  author={Santos, Henrique and Vieira, Renata},
+  booktitle={Proceedings of the 8th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis},
+  pages={189--192},
+  year={2017}
+}
